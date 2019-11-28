@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+//import Counter from "./Counter";
+import Forms from "./Forms";
 
 function App() {
   return (
@@ -19,6 +21,23 @@ function App() {
           Learn React
         </a>
       </header>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      {/*<Counter/>*/}
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+        <Forms/>
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
     </div>
   );
 }
