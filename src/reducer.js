@@ -31,7 +31,8 @@ export const formSlice = createSlice({
             reducer(state, action){
                 const {name, secondName, age} = action.payload;
 
-                return [...state, {name: name, secondName: secondName, age: age} ]
+                // return [...state, {name: name, secondName: secondName, age: age} ]
+                state.push({name: name, secondName: secondName, age: age});
             },
             prepare(name, secondName, age){
                 return {payload: {name, secondName, age}}
