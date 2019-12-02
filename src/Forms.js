@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {addItem} from "./reducer";
 
@@ -7,12 +7,16 @@ const Forms = () => {
     const dispatch = useDispatch();
 
     //todo ask about useState in several input fields
-    //todo  could not combined reducers
     //todo did not use async actions
     const [name, setName] = useState("");
     const [secondName, setSecondName] = useState("");
     const [age, setAge] = useState("");
 
+    const [example, setExample] = useState([{
+        name: "",
+        lastName: "",
+        age: ""
+    }]);
 
     const saveToStore = () => {
 
@@ -20,13 +24,20 @@ const Forms = () => {
 
         dispatch(addItem(name, secondName, age));
 
-    }
+    };
+    //
+    // const onInput = function (setState) {
+    //     return function (e) {
+    //         setState(e.target.value);
+    //     }
+    // };
+    const onInput = (setState) => (e) => setState(e.target.value);
 
     // let firstName = useSelector(state => state.name);
     // let lastName = useSelector(state => state.secondName);
     // let perAge = useSelector(state => state.age);
 
-    const personalData = [] = useSelector(state => state);
+    const personalData = useSelector(state => state.formSlice);
 
     return (
         <div>
@@ -34,21 +45,21 @@ const Forms = () => {
                 type="text"
                 name="name"
                 placeholder={'Name...'}
-                onChange={(e) => setName(e.target.value)}
+                onChange={onInput(setName)}
             />
             <br/>
             <input
                 type="text"
                 name="secondName"
                 placeholder={'Second name...'}
-                onChange={(e) => setSecondName(e.target.value)}
+                onChange={onInput(setSecondName)}
             />
             <br/>
             <input
                 type="text"
                 name="age"
                 placeholder={'Age...'}
-                onChange={(e) => setAge(e.target.value) }
+                onChange={onInput(setAge)}
             />
             <br/>
             <button onClick={() => saveToStore()}>Add</button>
@@ -58,12 +69,12 @@ const Forms = () => {
             <br/>
             <ul>
                 {personalData.map((data, index) =>
-                <div key={index} style={{display: "inlineBlock"}}>
-                    <li>{data.name}</li>
-                    <li>{data.secondName}</li>
-                    <li>{data.age}</li>
-                    <br/>
-                </div>
+                    <div key={index} style={{display: "inlineBlock"}}>
+                        <li>{data.name}</li>
+                        <li>{data.secondName}</li>
+                        <li>{data.age}</li>
+                        <br/>
+                    </div>
                 )}
             </ul>
         </div>

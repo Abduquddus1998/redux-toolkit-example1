@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-//import Counter from "./Counter";
+import Counter from "./Counter";
 import Forms from "./Forms";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
       <br/>
       <br/>
       <br/>
-      {/*<Counter/>*/}
+      <Counter/>
         <br/>
         <br/>
         <br/>

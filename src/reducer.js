@@ -9,15 +9,15 @@ import {combineReducers, createSlice} from "@reduxjs/toolkit";
 //     [decrease]: state => state - 1
 // })
 
-// export const rootSlice = createSlice({
-//     name: "counter",
-//     initialState: 4,
-//     reducers: {
-//         increment : state => state + 2,
-//         decrement : state => state - 2
-//     }
-// });
-//
+export const rootSlice = createSlice({
+    name: "counter",
+    initialState: 4,
+    reducers: {
+        increment : state => state + 2,
+        decrement : state => state - 2
+    }
+});
+
 
 export const formSlice = createSlice({
     name: "form",
@@ -40,12 +40,12 @@ export const formSlice = createSlice({
     }
 });
 
-
-export const {addItem} = formSlice.actions;
-// export const {increment, decrement} = rootSlice.actions;
 //
+export const {addItem} = formSlice.actions;
+export const {increment, decrement} = rootSlice.actions;
 
-// export const rootReducer = combineReducers({
-//     rootSLice: rootSlice.reducers,
-//     formSlice: formSlice.reducer
-// })
+
+export const rootReducer = combineReducers({
+    rootSLice: rootSlice.reducer,
+    formSlice: formSlice.reducer
+})
