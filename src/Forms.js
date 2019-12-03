@@ -6,24 +6,14 @@ const Forms = () => {
 
     const dispatch = useDispatch();
 
-    //todo ask about useState in several input fields
     //todo did not use async actions
     const [name, setName] = useState("");
     const [secondName, setSecondName] = useState("");
     const [age, setAge] = useState("");
 
-    const [example, setExample] = useState([{
-        name: "",
-        lastName: "",
-        age: ""
-    }]);
 
     const saveToStore = () => {
-
-        console.log(name, secondName, age);
-
         dispatch(addItem(name, secondName, age));
-
     };
     //
     // const onInput = function (setState) {
@@ -67,16 +57,7 @@ const Forms = () => {
             <br/>
             <br/>
             <br/>
-            <ul>
-                {personalData.map((data, index) =>
-                    <div key={index} style={{display: "inlineBlock"}}>
-                        <li>{data.name}</li>
-                        <li>{data.secondName}</li>
-                        <li>{data.age}</li>
-                        <br/>
-                    </div>
-                )}
-            </ul>
+           xx
         </div>
     );
 };

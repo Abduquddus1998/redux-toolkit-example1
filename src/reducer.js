@@ -8,7 +8,6 @@ import {combineReducers, createSlice} from "@reduxjs/toolkit";
 //     [increase]: state => state + 1,
 //     [decrease]: state => state - 1
 // })
-
 export const rootSlice = createSlice({
     name: "counter",
     initialState: 4,
@@ -18,6 +17,24 @@ export const rootSlice = createSlice({
     }
 });
 
+
+
+export const checkSelector = createSlice({
+    name: "select",
+    initialState: "",
+    reducers: {
+        setAddition: {
+            reducer(state, action){
+                const addition = action.payload;
+                // state.push({addition: addition});
+                return {...state, addition}
+            },
+            prepare(addition){
+                return {payload: addition}
+            }
+        }
+    }
+});
 
 export const formSlice = createSlice({
     name: "form",
@@ -44,9 +61,10 @@ export const formSlice = createSlice({
 //
 export const {addItem} = formSlice.actions;
 export const {increment, decrement} = rootSlice.actions;
-
+export const {setAddition} =  checkSelector.actions;
 
 export const rootReducer = combineReducers({
     rootSLice: rootSlice.reducer,
-    formSlice: formSlice.reducer
+    formSlice: formSlice.reducer,
+    checkSelector: checkSelector.reducer
 })

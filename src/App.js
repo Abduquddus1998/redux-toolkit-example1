@@ -1,10 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 import logo from './logo.svg';
 import './App.css';
 import Counter from "./Counter";
 import Forms from "./Forms";
+import {setAddition} from './reducer';
+import {returnString} from "./selectors";
 
 function App() {
+    const [select, setSelect] = useState("");
+    const dispatch = useDispatch();
+
+    const changeSelect = (e) => {
+        setSelect(e.currentTarget.value);
+    }
+
+    const showInput = () => {
+        dispatch(setAddition(select));
+    }
+
+    const newAdditionWithSelector = useSelector(state => returnString(state));
+    console.log(newAdditionWithSelector, "selector");
+
+    const newAddition = useSelector(state => state.checkSelector.addition);
+    console.log(newAddition, "withoutSelector");
   return (
     <div className="App">
       <header className="App-header">
@@ -21,6 +40,32 @@ function App() {
           Learn React
         </a>
       </header>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div>
+            <input
+            name={"select"}
+            type="text"
+            onChange={(e) => changeSelect(e)}
+            />
+            <button onClick={() => showInput()}>Return</button>
+            <br/>
+            <br/>
+            <span>{newAddition}</span>
+            <br/>
+            <span>{newAdditionWithSelector}</span>
+            {/*<ul>*/}
+            {/*    {newAddition.map((data, index) =>*/}
+            {/*        <div key={index} style={{display: "inlineBlock"}}>*/}
+            {/*            <li>{data.addition}</li>*/}
+            {/*            <br/>*/}
+            {/*        </div>*/}
+            {/*    )}*/}
+            {/*</ul>*/}
+        </div>
+
       <br/>
       <br/>
       <br/>
