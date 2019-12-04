@@ -57,7 +57,16 @@ const Forms = () => {
             <br/>
             <br/>
             <br/>
-           xx
+            <ul>
+                {personalData.map((data, index) =>
+                    <div key={index} style={{display: "inlineBlock"}}>
+                        <li>{data.name}</li>
+                        <li>{data.secondName}</li>
+                        <li>{data.age}</li>
+                        <br/>
+                    </div>
+                )}
+            </ul>
         </div>
     );
 };

@@ -6,24 +6,29 @@ import Counter from "./Counter";
 import Forms from "./Forms";
 import {setAddition} from './reducer';
 import {returnString} from "./selectors";
+import {username} from "./actions";
+import FetchingData from "./fetchingData";
 
 function App() {
     const [select, setSelect] = useState("");
+    const [act, setAct] = useState("");
     const dispatch = useDispatch();
 
-    const changeSelect = (e) => {
-        setSelect(e.currentTarget.value);
+
+    const handleInputs = (setState) => (e) => setState(e.target.value);
+
+    const sendToAct = () => {
+        dispatch(username(act));
     }
 
     const showInput = () => {
         dispatch(setAddition(select));
     }
 
+    const usingAct = useSelector(state => state.actReducer.username);
     const newAdditionWithSelector = useSelector(state => returnString(state));
-    console.log(newAdditionWithSelector, "selector");
-
     const newAddition = useSelector(state => state.checkSelector.addition);
-    console.log(newAddition, "withoutSelector");
+
   return (
     <div className="App">
       <header className="App-header">
@@ -48,7 +53,7 @@ function App() {
             <input
             name={"select"}
             type="text"
-            onChange={(e) => changeSelect(e)}
+            onChange={handleInputs(setSelect)}
             />
             <button onClick={() => showInput()}>Return</button>
             <br/>
@@ -56,15 +61,28 @@ function App() {
             <span>{newAddition}</span>
             <br/>
             <span>{newAdditionWithSelector}</span>
-            {/*<ul>*/}
-            {/*    {newAddition.map((data, index) =>*/}
-            {/*        <div key={index} style={{display: "inlineBlock"}}>*/}
-            {/*            <li>{data.addition}</li>*/}
-            {/*            <br/>*/}
-            {/*        </div>*/}
-            {/*    )}*/}
-            {/*</ul>*/}
         </div>
+
+        <br/>
+        <h1>Using Redux act</h1>
+        <div>
+            <input
+                name={"act"}
+                type="text"
+                onChange={handleInputs(setAct)}
+            />
+            <button onClick={() => sendToAct()}>Return</button>
+            <br/>
+            <br/>
+            <span>{usingAct.username}</span>
+            <br/>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <h1>Using Redux-thunk</h1>
+        <FetchingData/>
 
       <br/>
       <br/>
