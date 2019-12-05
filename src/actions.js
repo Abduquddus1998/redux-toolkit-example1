@@ -1,7 +1,7 @@
 //import {createAction} from "@reduxjs/toolkit";
 import {createAction} from "redux-act";
-import {apiReducer} from "./reducer";
-
+import {fetchRequested, fetchFailed, apiReducer} from "./reducer";
+import axios from "axios";
 // export const increase = createAction("INCREASE");
 // export const decrease = createAction("DECREASE");
 
@@ -10,10 +10,19 @@ export const username = createAction("Username", (username) => ({username}));
 
 export const getQuotes = () => (dispatch) => {
     console.log("getQuotes", dispatch);
-    fetch("https://ron-swanson-quotes.herokuapp.com/v2/quotes")
-        .then(response => response.json())
-        .then(data => {
-            console.log("data:", data);
-            dispatch(apiReducer(data));
-        });
+    dispatch(fetchRequested(false))
+
+    axios.get("https://ron-swanson-quotes.herokuapp.com/v2/quotes")
+        .then(res => {
+            console.log("data:", res.data);
+            dispatch(apiReducer(res.data));
+        })
+        .catch(error => dispatch(fetchFailed(error)));
+
+    axios.post(`https://jsonplaceholder.typicode.com/todos`, {
+        title: "New America",
+        userId: 12,
+        completed: false
+    }).then(res => console.log("result", res.data))
+        .catch(error => console.log("error", error));
 };

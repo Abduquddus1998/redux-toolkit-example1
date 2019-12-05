@@ -19,7 +19,6 @@ export const actReducer = createReducer(on => {
     }))
 }, initialState);
 
-
 export const rootSlice = createSlice({
     name: "counter",
     initialState: 4,
@@ -28,7 +27,6 @@ export const rootSlice = createSlice({
         decrement: state => state - 2
     }
 });
-
 
 export const checkSelector = createSlice({
     name: "select",
@@ -85,51 +83,47 @@ export const apiSLice = createSlice({
             prepare(quotes) {
                 return {payload: quotes}
             }
-            // },
-            // fetchFailed: {
-            //     reducer(state, action){
-            //         if(action.payload){
-            //             return {...state, error: action.payload}
-            //         } else {
-            //             return state;
-            //         }
-            //     },
-            //     prepare(error){
-            //         console.log("error", error);
-            //         return {payload: error}
-            //     }
-            // },
-            // fetchRequested: {
-            //     reducer(state, action){
-            //
-            //         return {...state, loading: action.payload}
-            //     },
-            //     prepare(loading){
-            //         console.log("loading:",loading);
-            //         return {payload: loading}
-            //     }
-            // }
+            },
+        fetchFailed: {
+            reducer(state, action){
+                if(action.payload){
+                    return {...state, error: action.payload}
+                } else {
+                    return state;
+                }
+            },
+            prepare(error){
+                console.log("error", error);
+                return {payload: error}
+            }
+        },
+        fetchRequested: {
+            reducer(state, action){
+                return {...state, loading: action.payload}
+            },
+            prepare(loading){
+                console.log("loading:",loading);
+                return {payload: loading}
+            }
         }
     }
-})
+});
+
+
 
 export const {addItem} = formSlice.actions;
 export const {increment, decrement} = rootSlice.actions;
 export const {setAddition} = checkSelector.actions;
-export const {apiReducer} = apiSLice.actions;
+export const {apiReducer, fetchFailed, fetchRequested} = apiSLice.actions;
 
 export const rootReducer = combineReducers({
     rootSLice: rootSlice.reducer,
     formSlice: formSlice.reducer,
     checkSelector: checkSelector.reducer,
     apiReducer: apiSLice.reducer,
-    // fetchFailed: apiSLice.fetchFailed,
-    // fetchRequested: apiSLice.fetchRequested,
+    fetchFailed: apiSLice.reducer,
+    fetchRequested: apiSLice.reducer,
     actReducer
 });
 
 
-/*
-*
-*
-* */
