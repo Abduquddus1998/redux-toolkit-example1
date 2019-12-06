@@ -15,7 +15,7 @@ const initialState = {
 export const actReducer = createReducer(on => {
     on(username, (state, username) => ({
         ...state,
-        username
+        username: username
     }))
 }, initialState);
 
@@ -125,5 +125,7 @@ export const rootReducer = combineReducers({
     fetchRequested: apiSLice.reducer,
     actReducer
 });
+
+
 
 
